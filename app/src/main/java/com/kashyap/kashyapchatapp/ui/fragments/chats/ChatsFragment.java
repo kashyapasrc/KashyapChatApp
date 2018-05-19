@@ -1,15 +1,22 @@
 package com.kashyap.kashyapchatapp.ui.fragments.chats;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.kashyap.kashyapchatapp.BasePresenter;
 import com.kashyap.kashyapchatapp.R;
+import com.kashyap.kashyapchatapp.ui.activities.SharedElementAnimation;
 import com.kashyap.kashyapchatapp.ui.adapters.ChatAdapter;
 import com.kashyap.kashyapchatapp.ui.fragments.BaseFragment;
 import com.kashyap.kashyapchatapp.ui.models.ChatModel;
+import com.kashyap.kashyapchatapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +25,8 @@ import java.util.List;
  * Created by XPS-Laptop on 21-Apr-18.
  */
 
-public class ChatsFragment extends BaseFragment implements ChatContract.View {
+public class ChatsFragment extends BaseFragment implements ChatContract.View, ChatRecyclerViewItemClickListener {
+
 
     private RecyclerView chatFragmentRecyclerView;
     List<ChatModel> chatModelList = new ArrayList<>();
@@ -39,7 +47,7 @@ public class ChatsFragment extends BaseFragment implements ChatContract.View {
         if (getView() != null) {
             chatFragmentRecyclerView = findView(R.id.recycler_view);
             if (chatFragmentRecyclerView != null) {
-                mAdapter = new ChatAdapter(chatModelList);
+                mAdapter = new ChatAdapter(chatModelList, this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
                 chatFragmentRecyclerView.setLayoutManager(mLayoutManager);
                 chatFragmentRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -69,5 +77,20 @@ public class ChatsFragment extends BaseFragment implements ChatContract.View {
     @Override
     public void setPresenter(BasePresenter presenter) {
 
+    }
+
+    @Override
+    public void onChatItemClick(View view, ImageView sharedImageView, int position)
+
+    {
+        Intent intent = new Intent(getContext(), SharedElementAnimation.class);
+        intent.putExtra(Constants.SharedElementTransistionKey, ViewCompat.getTransitionName(sharedImageView));
+
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(),
+                sharedImageView,
+                ViewCompat.getTransitionName(sharedImageView));
+
+        startActivity(intent, options.toBundle());
     }
 }

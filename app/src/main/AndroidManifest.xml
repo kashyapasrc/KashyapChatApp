@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.SharedElementAnimation"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.Transparent"/>
     </application>
 
 </manifest>

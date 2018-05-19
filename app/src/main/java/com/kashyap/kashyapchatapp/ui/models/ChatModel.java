@@ -1,5 +1,7 @@
 package com.kashyap.kashyapchatapp.ui.models;
 
+import com.kashyap.kashyapchatapp.utils.*;
+
 /**
  * Created by XPS-Laptop on 21-Apr-18.
  */
@@ -8,10 +10,10 @@ public class ChatModel {
 
 
     private int mId;
-    private String mName;
-    private String mChat;
+    private String mName = Constants.EMPTY;
+    private String mChat = Constants.EMPTY;
 
-    private String mProfileAvatar;
+    private String mProfileAvatar = Constants.EMPTY;
 
 
     public ChatModel(int mId, String mName, String mChat, String mProfileAvatar) {

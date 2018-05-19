@@ -1,5 +1,6 @@
 package com.kashyap.kashyapchatapp.ui.adapters;
 
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kashyap.kashyapchatapp.R;
+import com.kashyap.kashyapchatapp.ui.fragments.chats.ChatRecyclerViewItemClickListener;
 import com.kashyap.kashyapchatapp.ui.models.ChatModel;
 
 import java.util.List;
@@ -18,24 +20,34 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
 
+    private final ChatRecyclerViewItemClickListener mClickListener;
     private List<ChatModel> moviesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
         public ImageView profile_avatar;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-//            genre = (TextView) view.findViewById(R.id.genre);
-//            year = (TextView) view.findViewById(R.id.year);
+            profile_avatar = view.findViewById(R.id.profile_avatar);
         }
 
+        public void onBind(final int position, ChatModel model) {
+            ViewCompat.setTransitionName(profile_avatar, model.getName());
+
+            profile_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mClickListener!=null)
+                        mClickListener.onChatItemClick(itemView,profile_avatar,position);
+                }
+            });
+        }
     }
 
 
-    public ChatAdapter(List<ChatModel> moviesList) {
+    public ChatAdapter(List<ChatModel> moviesList, ChatRecyclerViewItemClickListener clickListener) {
         this.moviesList = moviesList;
+        this.mClickListener = clickListener;
     }
 
     @Override
@@ -49,7 +61,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ChatModel movie = moviesList.get(position);
-
+        holder.onBind(position,movie);
 
 
     }
