@@ -1,13 +1,16 @@
 package com.kashyap.kashyapchatapp.ui.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.kashyap.kashyapchatapp.R;
+import com.kashyap.kashyapchatapp.ui.models.ChatModel;
 import com.kashyap.kashyapchatapp.utils.Constants;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -16,6 +19,7 @@ public class SharedElementAnimation extends AppCompatActivity {
 
 
     ImageView profileAvatar;
+    ChatModel mChatModel;
 
     public void onCreate(Bundle savedStateInstance) {
         super.onCreate(savedStateInstance);
@@ -23,6 +27,8 @@ public class SharedElementAnimation extends AppCompatActivity {
         setContentView(R.layout.activity_shared_element_transistion);
         initView();
         Bundle extras = getIntent().getExtras();
+
+        mChatModel = (ChatModel) extras.get(Constants.CHAT_MODEL_KEY);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             String imageTransitionName = extras.getString(Constants.SharedElementTransistionKey);
@@ -57,6 +63,18 @@ public class SharedElementAnimation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        findViewById(R.id.ic_chat_icon_imageview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                Intent intent = ChatActivity.getIntentWithNewTask(SharedElementAnimation.this);
+                intent.putExtra(Constants.CHAT_MODEL_KEY, mChatModel);
+                startActivity(intent);
+
+
             }
         });
 

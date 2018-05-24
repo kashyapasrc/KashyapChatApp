@@ -25,7 +25,7 @@ public abstract class BaseFragment extends Fragment {
             this.activity = (MainActivity) activity;
 //            this.activity.setTitle(screenName());
         } catch (ClassCastException e) {
-            throw new RuntimeException("This fragment should have Activity instance");
+         //   throw new RuntimeException("This fragment should have Activity instance");
         }
     }
 

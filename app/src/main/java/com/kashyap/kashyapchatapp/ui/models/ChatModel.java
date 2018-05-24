@@ -1,19 +1,26 @@
 package com.kashyap.kashyapchatapp.ui.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.kashyap.kashyapchatapp.utils.*;
 
-/**
- * Created by XPS-Laptop on 21-Apr-18.
- */
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class ChatModel {
+public class ChatModel implements Serializable {
 
 
     private int mId;
     private String mName = Constants.EMPTY;
     private String mChat = Constants.EMPTY;
-
     private String mProfileAvatar = Constants.EMPTY;
+
+    public void setModels(ArrayList<DataModel> models) {
+        this.models = models;
+    }
+
+    private ArrayList<DataModel> models = new ArrayList<>();
 
 
     public ChatModel(int mId, String mName, String mChat, String mProfileAvatar) {
@@ -21,6 +28,16 @@ public class ChatModel {
         this.mName = mName;
         this.mChat = mChat;
         this.mProfileAvatar = mProfileAvatar;
+
+
+
+    }
+
+
+
+
+    public ArrayList<DataModel> getModels() {
+        return models;
     }
 
     public int getId() {
@@ -54,4 +71,6 @@ public class ChatModel {
     public void setProfileAvatar(String mProfileAvatar) {
         this.mProfileAvatar = mProfileAvatar;
     }
+
+
 }

@@ -1,9 +1,5 @@
 package com.kashyap.kashyapchatapp.ui.ViewPager;
 
-/**
- * Created by XPS-Laptop on 21-Apr-18.
- */
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;

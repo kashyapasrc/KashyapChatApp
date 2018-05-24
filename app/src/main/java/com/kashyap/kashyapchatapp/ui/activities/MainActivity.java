@@ -1,5 +1,7 @@
 package com.kashyap.kashyapchatapp.ui.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,14 +14,25 @@ import com.kashyap.kashyapchatapp.ui.ViewPager.Pager;
 import com.kashyap.kashyapchatapp.ui.fragments.calls.CallsContract;
 import com.kashyap.kashyapchatapp.ui.fragments.calls.CallsFragment;
 import com.kashyap.kashyapchatapp.ui.fragments.calls.CallsPresenter;
-import com.kashyap.kashyapchatapp.ui.fragments.chats.ChatContract;
-import com.kashyap.kashyapchatapp.ui.fragments.chats.ChatPresenter;
-import com.kashyap.kashyapchatapp.ui.fragments.chats.ChatsFragment;
+import com.kashyap.kashyapchatapp.ui.fragments.chatList.ChatContract;
+import com.kashyap.kashyapchatapp.ui.fragments.chatList.ChatPresenter;
+import com.kashyap.kashyapchatapp.ui.fragments.chatList.ChatsFragment;
 import com.kashyap.kashyapchatapp.ui.fragments.status.StatusContract;
 import com.kashyap.kashyapchatapp.ui.fragments.status.StatusFragment;
 import com.kashyap.kashyapchatapp.ui.fragments.status.StatusPresenter;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+
+    public static Intent getIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
+
+    public static Intent getIntentWithNewTask(Context context) {
+        Intent intent = getIntent(context);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        return intent;
+    }
 
 
     //This is our tablayout
@@ -83,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
 
         adapter.addFrag(chatsFragment, getString(R.string.tab_title_chats));
-        adapter.addFrag(statusFragment,getString(R.string.tab_title_status));
-        adapter.addFrag(callsFragment,getString(R.string.tab_title_calls));
+        adapter.addFrag(statusFragment, getString(R.string.tab_title_status));
+        adapter.addFrag(callsFragment, getString(R.string.tab_title_calls));
 
         viewPager.setAdapter(adapter);
     }

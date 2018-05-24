@@ -10,9 +10,6 @@ import com.kashyap.kashyapchatapp.BasePresenter;
 import com.kashyap.kashyapchatapp.R;
 import com.kashyap.kashyapchatapp.ui.fragments.BaseFragment;
 
-/**
- * Created by XPS-Laptop on 21-Apr-18.
- */
 
 public class CallsFragment extends BaseFragment implements CallsContract.View {
 
